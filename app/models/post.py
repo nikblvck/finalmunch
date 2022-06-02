@@ -10,6 +10,10 @@ class Post(db.Model):
   created_at = db.Column(db.DateTime, nullable=False, default=db.func.now())
   updated_at = db.Column(db.DateTime, nullable=False, default=db.func.now(), onupdate=db.func.now())
 
+
+  images = db.relationship('Image', backref='post', lazy=True)
+
+
   @property
   def post_summary(self):
     return self.caption[:100]
@@ -21,7 +25,8 @@ class Post(db.Model):
       'category_id': self.category_id,
       'user_id': self.user_id,
       'created_at': self.created_at,
-      'updated_at': self.updated_at
+      'updated_at': self.updated_at,
+      'images': [image.image_summary for image in self.images]
     }
 
   def __repr__(self):

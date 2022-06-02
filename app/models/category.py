@@ -1,17 +1,17 @@
 from .db import db
 
-class Like(db.Model):
-  __tablename__ = 'likes'
+class Category(db.Model):
+  __tablename__ = 'categories'
 
   id = db.Column(db.Integer, primary_key=True)
-  post_id = db.Column(db.Integer, db.ForeignKey('posts.id'), nullable=False)
-  user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+  name = db.Column(db.String(255), nullable=False)
+
+  posts = db.relationship('Post', backref='category', lazy=True)
 
   def to_dict(self):
     return {
       'id': self.id,
-      'post_id': self.post_id,
-      'user_id': self.user_id
+      'name': self.name,
+      'posts': [post.to_dict() for post in self.posts],
+      'post_count': len(self.posts)
     }
-
-
