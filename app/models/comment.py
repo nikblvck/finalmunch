@@ -10,6 +10,8 @@ class Comment(db.Model):
   created_at = db.Column(db.DateTime, nullable=False, default=db.func.now())
   updated_at = db.Column(db.DateTime, nullable=False, default=db.func.now(), onupdate=db.func.now())
 
+  user = db.relationship('User', back_populates='comments', lazy=True)
+  post = db.relationship('Post', back_populates='comments', lazy=True)
 
   def to_dict(self):
     return {

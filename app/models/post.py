@@ -11,11 +11,11 @@ class Post(db.Model):
   updated_at = db.Column(db.DateTime, nullable=False, default=db.func.now(), onupdate=db.func.now())
 
 
-  images = db.relationship('Image', backref='post', lazy=True)
+  images = db.relationship('Image', back_populates='post', lazy=True)
   categories = db.relationship('Category', back_populates='posts', lazy=True)
   comments = db.relationship('Comment', back_populates='post', lazy=True)
   likes = db.relationship('Like', back_populates='post', lazy=True)
-
+  user = db.relationship('User', back_populates='posts', lazy=True)
 
   @property
   def post_summary(self):
