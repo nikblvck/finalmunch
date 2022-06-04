@@ -8,17 +8,14 @@ def seed_posts():
   posts = [
     {
       'caption': 'This is a test post',
-      'category_id': 1,
       'user_id': 1
     },
     {
       'caption': 'This is another test post',
-      'category_id': 2,
       'user_id': 1
     },
     {
       'caption': 'This is the third and probably final...for now...test post',
-      'category_id': 3,
       'user_id': 1
     }
   ]

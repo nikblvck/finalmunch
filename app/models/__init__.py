@@ -5,3 +5,4 @@ from .post import Post
 from .comment import Comment
 from .like import Like
 from .image import Image
+from .has_category import HasCategory
