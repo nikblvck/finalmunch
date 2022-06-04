@@ -13,7 +13,8 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
-    profile_img = db.Column(db.String(255), nullable=False, default='default_profile.png')
+    profile_img = db.Column(db.String(
+        255), nullable=False, default='https://res.cloudinary.com/bigtechnik/image/upload/v1650336129/munch/image_gwpqvz.jpg')
     created_at = db.Column(db.DateTime, nullable=False, default=db.func.now())
     updated_at = db.Column(db.DateTime, nullable=False, default=db.func.now(), onupdate=db.func.now())
 

@@ -12,6 +12,9 @@ class Post(db.Model):
 
 
   images = db.relationship('Image', backref='post', lazy=True)
+  categories = db.relationship('Category', back_populates='posts', lazy=True)
+  comments = db.relationship('Comment', back_populates='post', lazy=True)
+  likes = db.relationship('Like', back_populates='post', lazy=True)
 
 
   @property

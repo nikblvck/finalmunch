@@ -9,7 +9,7 @@ class Image(db.Model):
   created_at = db.Column(db.DateTime, nullable=False, default=db.func.now())
   updated_at = db.Column(db.DateTime, nullable=False, default=db.func.now(), onupdate=db.func.now())
 
-  post = db.relationship('Post', backref='images')
+  post = db.relationship('Post', back_populates='images')
 
 
   @property
