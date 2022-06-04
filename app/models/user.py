@@ -18,7 +18,7 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, nullable=False, default=db.func.now())
     updated_at = db.Column(db.DateTime, nullable=False, default=db.func.now(), onupdate=db.func.now())
 
-    posts = db.relationship('Post', back_populates='user', lazy=True)
+    post = db.relationship('Post', back_populates='user', lazy=True)
     comments = db.relationship('Comment', back_populates='user', lazy=True)
     likes = db.relationship('Like', back_populates='user', lazy=True)
 
@@ -39,7 +39,7 @@ class User(db.Model, UserMixin):
             'id': self.id,
             'username': self.username,
             'email': self.email,
-            'posts_count': len(self.posts),
+            'posts_count': len(self.post),
             'comments_count': len(self.comments),
             'likes_count': len(self.likes)
 

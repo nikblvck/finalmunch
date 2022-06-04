@@ -7,32 +7,27 @@ def seed_posts():
   #create a list of posts
   posts = [
     {
-      'caption': 'Just a demo post',
-      'user_id': 1,
+      'caption': 'This is a test post',
       'category_id': 1,
-      'created_at': new Date(),
-      'updated_at': new Date()
-
+      'user_id': 1
     },
     {
-      'caption': 'Another demo post',
-      'user_id': 1,
-      'category_id': 1,
-      'created_at': new Date(),
-      'updated_at': new Date()
+      'caption': 'This is another test post',
+      'category_id': 2,
+      'user_id': 1
+    },
+    {
+      'caption': 'This is the third and probably final...for now...test post',
+      'category_id': 3,
+      'user_id': 1
     }
   ]
   #loop through the list of posts and add them to the database
   for post in posts:
-    new_post = Post(
-        caption=post['caption'],
-        user_id=post['user_id'],
-        category_id=post['category_id'],
-        created_at=post['created_at'],
-        updated_at=post['updated_at']
-    )
+    new_post = Post(**post)
     db.session.add(new_post)
   db.session.commit()
+
 
 def undo_posts():
   db.session.execute('TRUNCATE posts RESTART IDENTITY CASCADE;')
