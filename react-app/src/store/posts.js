@@ -37,11 +37,18 @@ const deletePost = post => ({
 
 
 //READ ALL POSTS THUNK
-export const getAllPosts = () => async dispatch => {
-  const response = await fetch('/api/posts/');
-  const posts = await response.json();
-  dispatch(getAllPosts(posts));
-}
+export const getAllPosts = () => async (dispatch) => {
+	const response = await fetch("/api/posts/", {
+		headers: {
+			"Content-Type": "application/json",
+		},
+	});
+
+	if (response.ok) {
+		const posts = await response.json();
+		dispatch(getPosts(posts));
+	}
+};
 
 //Reducer
 const initialState = {
@@ -56,7 +63,6 @@ export default function reducer(state = initialState, action) {
     case GET_ALL_POSTS:
       newState = {...state};
       newState.posts = action.posts;
-      newState.isLoading = false;
       return newState;
     case GET_ONE_POST:
       newState = {...state};
