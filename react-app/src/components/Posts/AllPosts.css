@@ -1,0 +1,10 @@
+/*Main Container*/
+.home-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.post_img_home {
+  height: 300px;
+
+}

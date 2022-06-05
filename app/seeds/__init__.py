@@ -3,6 +3,7 @@ from .users import seed_users, undo_users
 from .categories import seed_categories, undo_categories
 from .posts import seed_posts, undo_posts
 from .has_categories import seed_has_categories, undo_has_categories
+from .images import seed_images, undo_images
 # Creates a seed group to hold our commands
 # So we can type `flask seed --help`
 seed_commands = AppGroup('seed')
@@ -15,6 +16,7 @@ def seed():
     seed_categories()
     seed_posts()
     seed_has_categories()
+    seed_images()
     # Add other seed functions here
 
 
@@ -25,4 +27,5 @@ def undo():
     undo_categories()
     undo_posts()
     undo_has_categories()
+    undo_images()
     # Add other undo functions here

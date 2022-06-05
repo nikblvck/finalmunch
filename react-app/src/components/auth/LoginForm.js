@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
+import './Auth.css';
 
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
@@ -9,7 +10,8 @@ const LoginForm = () => {
   const [password, setPassword] = useState('');
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
-
+  //TO DO: add error handling
+  //TO DO: add option for user to login with email or password
   const onLogin = async (e) => {
     e.preventDefault();
     const data = await dispatch(login(email, password));
@@ -31,6 +33,9 @@ const LoginForm = () => {
   }
 
   return (
+    <>
+    <div className="main-container">
+      <div className="login-container">
     <form onSubmit={onLogin}>
       <div>
         {errors.map((error, ind) => (
@@ -59,6 +64,9 @@ const LoginForm = () => {
         <button type='submit'>Login</button>
       </div>
     </form>
+    </div>
+    </div>
+    </>
   );
 };
 
