@@ -23,8 +23,11 @@ function AllPosts() {
       {posts?.map((post) => (
         <div key={post.id}>
           <h1>{post.caption}</h1>
-          {post?.images.map((image) => (
+          {post?.images?.map((image) => (
             <img src={image.url} alt={image.caption} className="post_img_home"/>
+          ))}
+          {post?.has_categories?.map((category) => (
+            <h3>{category}</h3>
           ))}
           </div>
       ))}

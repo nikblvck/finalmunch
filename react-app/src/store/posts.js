@@ -34,6 +34,27 @@ const deletePost = post => ({
   type: DELETE_POST,
   post,
 });
+//CREATE POST THUNK
+export const addPost = (post) => async (dispatch) => {
+	const response = await fetch("/api/posts/new/", {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(post),
+	});
+	if (response.ok) {
+		const newPost = await response.json();
+		dispatch(createPost(newPost));
+	} else if (response.status < 500) {
+		const data = await response.json();
+		if (data.errors) {
+			return data.errors;
+		}
+	} else {
+		return ["An error occurred. Please try again."];
+	}
+};
 
 
 //READ ALL POSTS THUNK
