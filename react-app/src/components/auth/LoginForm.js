@@ -9,7 +9,8 @@ const LoginForm = () => {
   const [password, setPassword] = useState('');
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
-
+  //TO DO: add error handling
+  //TO DO: add option for user to login with email or password
   const onLogin = async (e) => {
     e.preventDefault();
     const data = await dispatch(login(email, password));

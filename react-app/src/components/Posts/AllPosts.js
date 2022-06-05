@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getAllPosts } from '../../store/posts';
+import { getAllPosts, getAllCategories } from '../../store/posts';
 import './AllPosts.css';
 
 function AllPosts() {
@@ -12,6 +12,7 @@ function AllPosts() {
   useEffect(() => {
     if (!isLoaded) {
       dispatch(getAllPosts());
+      dispatch(getAllCategories());
       setIsLoaded(true);
     }
   }, [dispatch, isLoaded]);

@@ -1,11 +1,15 @@
 //Constants
+//Posts
 const GET_ALL_POSTS = 'posts/GET_ALL_POSTS';
 const GET_ONE_POST = 'posts/GET_ONE_POST';
 const CREATE_POST = 'posts/CREATE_POST';
 const UPDATE_POST = 'posts/UPDATE_POST';
 const DELETE_POST = 'posts/DELETE_POST';
+//Categories
+const GET_CATEGORIES = 'categories/GET_CATEGORIES';
 
 
+//POSTS
 //READ ALL POSTS ACTION CREATOR
 const getPosts = posts => ({
   type: GET_ALL_POSTS,
@@ -34,6 +38,15 @@ const deletePost = post => ({
   type: DELETE_POST,
   post,
 });
+
+//CATEGORIES
+//READ ALL CATEGORIES ACTION CREATOR
+const getCategories = categories => ({
+	type: GET_CATEGORIES,
+	categories,
+});
+
+
 //CREATE POST THUNK
 export const addPost = (post) => async (dispatch) => {
 	const response = await fetch("/api/posts/new/", {
@@ -71,10 +84,31 @@ export const getAllPosts = () => async (dispatch) => {
 	}
 };
 
+//READ ALL CATEGORIES THUNK
+// export const getAllCategories = () => async (dispatch) => {
+// 	const response = await fetch("/api/categories/", {
+// 		headers: {
+// 			"Content-Type": "application/json",
+// 		},
+// 	});
+
+export const getAllCategories = () => async (dispatch) => {
+	const response = await fetch("/api/categories/", {
+		headers: {
+			"Content-Type": "application/json",
+		},
+	});
+	if (response.ok) {
+		const categories = await response.json();
+		dispatch(getCategories(categories));
+	}
+};
+
 //Reducer
 const initialState = {
   posts: [],
-  post: {}
+  post: {},
+	categories: [],
 };
 
 export default function reducer(state = initialState, action) {
@@ -90,6 +124,10 @@ export default function reducer(state = initialState, action) {
       newState.post = action.post;
       newState.isLoading = false;
       return newState;
+		case GET_CATEGORIES:
+			newState = {...state};
+			newState.categories = action.categories;
+			return newState;
     default:
       return state;
 }

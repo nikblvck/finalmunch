@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Select from "react-select";
 import { useHistory } from "react-router";
 import { addPost } from "../../../store/posts";
 import { getCategories } from "../../../store/categories";
@@ -9,9 +10,9 @@ function NewPost() {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const user = useSelector((state) => state?.session?.user);
-	const [image_url, setImage_url] = useState("");
+	const [images, setImages] = useState([]);
 	const [caption, setCaption] = useState("");
-	const [category_id, setCategoryId] = useState(0);
+	const [category_ids, setCategoryIds] = useState([]);
 	const [isLoaded, setIsLoaded] = useState(false);
 	const [errors, setErrors] = useState([]);
 	const categories = useSelector((state) => state?.categories);
@@ -25,9 +26,9 @@ function NewPost() {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const newPost = {
-			image_url,
+			images,
 			caption,
-			category_id,
+			category_ids,
 			user_id: user.id,
 		};
 		if (newPost) {
