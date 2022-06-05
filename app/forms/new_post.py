@@ -5,5 +5,5 @@ from app.models import Post, Category, Image
 
 class NewPostForm(FlaskForm):
     caption = StringField('caption', validators=[Length(min=2)])
-    categories = StringField('categories', validators=[DataRequired])
-    images = FileField('images', validators=[DataRequired])
+    categories = StringField('categories', validators=[DataRequired()])
+    images = FileField('images', validators=[DataRequired()])
