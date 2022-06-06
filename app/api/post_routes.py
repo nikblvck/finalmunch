@@ -57,15 +57,14 @@ def new_post_with_images():
 @post_routes.route("/")
 def read_all_posts():
     posts = Post.query.all()
-    return {'posts': [post.to_dict() for post in posts]}
-
+    return jsonify([post.to_dict() for post in posts])
 #Read a single post
 @post_routes.route("/<int:post_id>", methods=["GET"])
 def get_post(post_id):
     post = Post.query.filter_by(id=post_id).first()
     if post is None:
         return jsonify({"error": "Post not found"}), 404
-    return jsonify(post.to_dict())
+    return post.to_dict()
 
 #Update a post
 @post_routes.route("/<int:post_id>", methods=["PUT"])

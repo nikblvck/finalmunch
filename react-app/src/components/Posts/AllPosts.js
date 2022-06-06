@@ -6,7 +6,7 @@ import './AllPosts.css';
 function AllPosts() {
   const user = useSelector(state => state?.session?.user);
   const dispatch = useDispatch();
-  const posts = useSelector((state) => state?.posts?.posts?.posts);
+  const posts = useSelector((state) => state?.posts?.posts);
   const[ isLoaded, setIsLoaded ]= useState(false);
   console.log(posts)
   useEffect(() => {
