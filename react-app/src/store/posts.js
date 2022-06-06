@@ -5,8 +5,7 @@ const GET_ONE_POST = 'posts/GET_ONE_POST';
 const CREATE_POST = 'posts/CREATE_POST';
 const UPDATE_POST = 'posts/UPDATE_POST';
 const DELETE_POST = 'posts/DELETE_POST';
-//Categories
-const GET_CATEGORIES = 'categories/GET_CATEGORIES';
+
 
 
 //POSTS
@@ -39,12 +38,6 @@ const deletePost = post => ({
   post,
 });
 
-//CATEGORIES
-//READ ALL CATEGORIES ACTION CREATOR
-const getCategories = categories => ({
-	type: GET_CATEGORIES,
-	categories,
-});
 
 
 //CREATE POST THUNK
@@ -92,23 +85,12 @@ export const getAllPosts = () => async (dispatch) => {
 // 		},
 // 	});
 
-export const getAllCategories = () => async (dispatch) => {
-	const response = await fetch("/api/categories/", {
-		headers: {
-			"Content-Type": "application/json",
-		},
-	});
-	if (response.ok) {
-		const categories = await response.json();
-		dispatch(getCategories(categories));
-	}
-};
 
 //Reducer
 const initialState = {
   posts: [],
   post: {},
-	categories: [],
+
 };
 
 export default function reducer(state = initialState, action) {
@@ -124,9 +106,7 @@ export default function reducer(state = initialState, action) {
       newState.post = action.post;
       newState.isLoading = false;
       return newState;
-		case GET_CATEGORIES:
-			newState = {...state};
-			newState.categories = action.categories;
+
 			return newState;
     default:
       return state;
