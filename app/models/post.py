@@ -21,6 +21,10 @@ class Post(db.Model):
   def post_summary(self):
     return self.caption[:100]
 
+
+
+
+
   def to_dict(self):
     return {
       'id': self.id,
@@ -28,8 +32,8 @@ class Post(db.Model):
       'user_id': self.user_id,
       'created_at': self.created_at,
       'updated_at': self.updated_at,
-      'images': [image.image_summary for image in self.images],
-      'comments': [comment.content for comment in self.comments],
+      'images': [image.to_dict() for image in self.images],
+      'comments': [comment.to_dict() for comment in self.comments],
       'likes_count': len(self.likes),
       'has_categories': [has_category.category_name() for has_category in self.has_categories]
 

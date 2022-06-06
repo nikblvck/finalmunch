@@ -17,5 +17,3 @@ class Like(db.Model):
       'post_id': self.post_id,
       'user_id': self.user_id
     }
-
- 
